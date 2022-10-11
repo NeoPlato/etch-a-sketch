@@ -1,7 +1,7 @@
 ### Etch-a-Sketch
 It's a drawing pad, knock yourself out.
 
-Courtesy of [the Odin Project](https://www.theodinproject.com>
+Courtesy of [the Odin Project](https://www.theodinproject.com)
 
 ### CONTENT
 
