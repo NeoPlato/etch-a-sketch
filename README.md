@@ -9,6 +9,6 @@ Your cursor is a pen and you can use it to draw on a grid. [Check it out here.](
 
 ### Skill level
 
-*    [ ]  Create the grid.
-*    [ ]  Make the grid functional for simple sketches.
+*    [x]  Create the grid.
+*    [x]  Make the grid functional for simple sketches.
 *    [ ]  Go for gold with the rainbow sketching.
