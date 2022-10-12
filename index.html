@@ -9,8 +9,26 @@
 </head>
 <body>
     <h1>Etch-a-Sketch</h1>
-    <div class="container"></div>
-    <script></script>
-    <!-- <input type="range" value="16" min="2" max="64"> -->
+    <div class="container">
+        <div class="settings">
+            <input type="color" value="#333333">
+            <label for="grid">16×16</label>
+            <input type="range" value="16" min="2" max="64">
+            <button>Clear</button>
+        </div>
+        <div class="grid"></div>
+    </div>
+    <script>
+        createGrid(16);
+        range = document.querySelector('input[type="range"]');
+        colorInput = document.querySelector('input[type="color"');
+        button = document.querySelector("button");
+        
+        document.body.addEventListener("mousedown", () => {DRAWING = true;});
+        document.body.addEventListener("mouseup", () => {DRAWING = false;});
+        range.addEventListener("input", updateGrid);
+        colorInput.addEventListener("input", updateColor);
+        button.addEventListener("click", clearGrid);
+    </script>
 </body>
 </html>
