@@ -36,6 +36,9 @@ function drawGrid() {
 function toggleEraser() {
     this.classList.toggle("active-button");
     ERASING = !ERASING;
+    grid = document.querySelector(".grid");
+    ERASING ? grid.style.cursor = "-webkit-grab"
+            : grid.style.cursor = "crosshair";
 }
 
 function toggleRandom() {
