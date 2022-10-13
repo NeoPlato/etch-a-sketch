@@ -1,9 +1,86 @@
 let PENCOLOR = "#333333"
 let DRAWING = false;
+let ERASING = false;
 
-function drawGrid(e) {
-    if (e.type === "mouseover" && !DRAWING) return;
-    this.style.backgroundColor = PENCOLOR; 
+let RANDOM = false;
+let GRAYSCALE = false;
+
+
+function drawGrid() {
+    if (!DRAWING) return;
+    if (GRAYSCALE) {
+        if (!this.hasAttribute("grayscale")) {
+            this.grayscale = Math.round(Math.random() * 255);
+            rgbValue = this.grayscale.toString(16);
+            this.style.backgroundColor = `#${rgbValue}${rgbValue}${rgbValue}`;
+            return;
+        }
+        rgbValue = parseInt(this.style.backgroundColor.substr(1,2), 16);
+        rgbValue = Math.max(Math.round(rgbValue - this.grayscale/10), 0);
+        this.style.backgroundColor = `#${rgbValue}${rgbValue}${rgbValue}`;
+        console.log(this.style.backgroundColor);
+        return;
+    }
+    if (this.hasAttribute("style")) return;
+    if (ERASING) {
+        this.removeAttribute("style");
+        return;
+    }
+
+    let color = "";
+    RANDOM ? color = "#" + (Math.round(Math.random() * 0xffffff)).toString(16)
+           : color = PENCOLOR;
+    this.style.backgroundColor = color; 
+}
+
+function toggleEraser() {
+    this.classList.toggle("active-button");
+    ERASING = !ERASING;
+}
+
+function toggleRandom() {
+    this.classList.toggle("active-button");
+    RANDOM = !RANDOM;
+    GRAYSCALE = RANDOM ? false : GRAYSCALE;
+
+    if (RANDOM) {
+        grayscale = document.querySelector("button#grayscale");
+        grayscale.classList.remove("active-button");
+        regular = document.querySelector("button#regular");
+        regular.classList.remove("active-button");
+    }
+}
+
+function toggleGrayscale() {
+    this.classList.toggle("active-button");
+    GRAYSCALE = !GRAYSCALE;
+    RANDOM = GRAYSCALE ? false : RANDOM;
+
+    if (GRAYSCALE) {
+        random = document.querySelector("button#random");
+        random.classList.remove("active-button");
+        regular = document.querySelector("button#regular");
+        regular.classList.remove("active-button");
+    }
+}
+
+function toggleRegular() {
+    this.classList.toggle("active-button");
+    const isActive = this.classList.contains("active-button");
+
+    if (isActive) {
+        if (RANDOM) {
+            let random = document.querySelector("button#random");
+            random.classList.remove("active-button");
+        }
+        if (GRAYSCALE) {
+            let grayscale = document.querySelector("button#grayscale");
+            grayscale.classList.remove("active-button");
+        }
+    }
+
+    RANDOM = isActive ? false : RANDOM;
+    GRAYSCALE = isActive ? false : GRAYSCALE;
 }
 
 function createGrid(size) {
