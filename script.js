@@ -8,6 +8,10 @@ let GRAYSCALE = false;
 
 function drawGrid() {
     if (!DRAWING) return;
+    if (ERASING) {
+        this.removeAttribute("style");
+        return;
+    }
     if (GRAYSCALE) {
         if (!this.hasAttribute("grayscale")) {
             this.grayscale = Math.round(Math.random() * 255);
@@ -22,10 +26,6 @@ function drawGrid() {
         return;
     }
     if (this.hasAttribute("style")) return;
-    if (ERASING) {
-        this.removeAttribute("style");
-        return;
-    }
 
     let color = "";
     RANDOM ? color = "#" + (Math.round(Math.random() * 0xffffff)).toString(16)
